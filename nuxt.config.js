@@ -1,4 +1,4 @@
-const PrismicConfig = require('./prismic.config')
+
 
 module.exports = {
   mode: 'universal',
@@ -18,12 +18,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-    ],
-    script: [
-      { innerHTML: '{ window.prismic = { endpoint: "' + PrismicConfig.apiEndpoint + '"} }' },
-      { src: '//static.cdn.prismic.io/prismic.min.js' }
-    ],
-    __dangerouslyDisableSanitizers: ['script'],
+    ]
   },
 
   /*
