@@ -18,7 +18,7 @@ export default {
 
   generate: {
     "dir": "public"
-  }
+  },
   /*
   ** Customize the progress-bar color
   */
