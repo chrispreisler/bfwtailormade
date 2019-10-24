@@ -1,3 +1,13 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+
+h1 {
+  @apply text-6xl;
+}
+
+p {
+  @apply mt-4;
+}
+
+@tailwind components;
+
+@tailwind utilities;

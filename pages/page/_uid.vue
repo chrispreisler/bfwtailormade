@@ -1,11 +1,9 @@
 <template>
-  <section class="homepage">
+  <section class="page">
     <!-- Vue tag to add header component -->
     <header-prismic :menuLinks="menuLinks"/>
     <!-- Button to edit document in dashboard -->
     <prismic-edit-button :documentId="documentId"/>
-    <!-- Banner component -->
-    <homepage-banner :banner="banner"/>
     <!-- Slices block component -->
     <slices-block :slices="slices"/>
   </section>
@@ -16,14 +14,12 @@ import Prismic from "prismic-javascript"
 import PrismicConfig from "~/prismic.config.js"
 // Imports for all components
 import HeaderPrismic from '~/components/HeaderPrismic.vue'
-import HomepageBanner from '~/components/HomepageBanner.vue'
 import SlicesBlock from '~/components/SlicesBlock.vue'
 
 export default {
-  name: 'Home',
+  name: 'page',
   components: {
     HeaderPrismic,
-    HomepageBanner,
     SlicesBlock,
   },
   head () {
@@ -31,18 +27,15 @@ export default {
       title: 'Prismic Nuxt.js Multi Page Website',
     }
   },
-  async asyncData({context, error, req}) {
+  async asyncData({ params, error, req }) {
     try{
       // Fetching the API object
       const api = await Prismic.getApi(PrismicConfig.apiEndpoint, {req})
 
-      // Query to get the home page content
+      // Query to get post content
       let document = {}
-      const result = await api.getSingle('homepage')
+      const result = await api.getByUID("page", params.uid)
       document = result.data
-
-      // Setting the banner as a variable
-      let banner = document.homepage_banner[0]
 
       // Query to get the menu content
       let menuContent = {}
@@ -53,10 +46,10 @@ export default {
       if (process.client) window.prismic.setupEditButton()
 
       return {
-        // Page content
+        // Post content
         document,
         documentId: result.id,
-        banner,
+
         // Set slices as variable
         slices: document.page_content,
 
@@ -65,6 +58,7 @@ export default {
         menuLinks: menuContent.menu_links
       }
     } catch (e) {
+      // Returns error page
       error({ statusCode: 404, message: 'Page not found' })
     }
   },

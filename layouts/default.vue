@@ -1,16 +1,21 @@
 <template>
   <div>
-    <header-bfw />
     <nuxt />
+    <footer-prismic/>
   </div>
 </template>
 
 <script>
-import HeaderBfw from '~/components/HeaderBfw.vue'
+import FooterPrismic from '~/components/FooterPrismic.vue'
 
 export default {
   components: {
-    HeaderBfw
+    FooterPrismic
+  },
+  head () {
+    return {
+      title: 'Prismic Nuxt.js Multi Page Website',
+    }
   }
 }
 </script>
